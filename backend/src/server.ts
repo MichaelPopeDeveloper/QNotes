@@ -83,7 +83,7 @@ export class Server {
 
     this.app.use(
       session({
-        secret: 'midoria-shonen',
+        secret: 'midoria-shonen', // change
         resave: false,
         saveUninitialized: false,
 
