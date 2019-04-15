@@ -4,7 +4,8 @@ import * as session from 'express-session';
 import * as passport from 'passport';
 import * as logger from 'morgan';
 import * as path from 'path';
-import { mainRoute } from './routes/MainRoute';
+import { MainRoute } from './routes/MainRoute';
+import { UserRoute } from './routes/User/UserRoute';
 import { connect } from 'mongoose';
 
 /**
@@ -16,7 +17,7 @@ import { connect } from 'mongoose';
 export class Server {
   private port: any = process.env.PORT || 3001;
   public app: express.Application;
-  private dbName = 'new-app';
+  private dbName = 'QNotes';
 
   /**
    * Bootstrap the application.
@@ -132,7 +133,8 @@ export class Server {
    */
   private routes() {
     // use router middleware
-    this.app.use('/', mainRoute);
+    this.app.use('/', MainRoute);
+    this.app.use('/user', UserRoute);
     // this.app.use('/test', (req, res) => res.send('Go beyond!'));
   }
 

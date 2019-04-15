@@ -6,11 +6,12 @@ var session = require("express-session");
 var passport = require("passport");
 var logger = require("morgan");
 var MainRoute_1 = require("./routes/MainRoute");
+var UserRoute_1 = require("./routes/User/UserRoute");
 var mongoose_1 = require("mongoose");
 var Server = (function () {
     function Server() {
         this.port = process.env.PORT || 3001;
-        this.dbName = 'new-app';
+        this.dbName = 'QNotes';
         this.app = express();
         this.config();
         this.routes();
@@ -46,7 +47,8 @@ var Server = (function () {
         });
     };
     Server.prototype.routes = function () {
-        this.app.use('/', MainRoute_1.mainRoute);
+        this.app.use('/', MainRoute_1.MainRoute);
+        this.app.use('/user', UserRoute_1.UserRoute);
     };
     return Server;
 }());

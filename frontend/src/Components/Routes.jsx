@@ -2,16 +2,14 @@ import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
   Route,
-  Link,
-  Redirect,
-  withRouter
 } from "react-router-dom";
 import Home from './Home/Home';
-import Private from './auth/PrivateComponent';
+import Login from './Login/Login';
+import Signup from './Signup/Signup';
+import Private from './Auth/Private';
 import PrivateRoute from './Auth/PrivateRoute';
 import { connect } from 'react-redux';
 import { logoutUser } from '../actions/index';
-import * as axios from 'axios';
 
 
 
@@ -38,8 +36,10 @@ class Routes extends Component {
   render = () => {
     return (
       <Router>
-        <Menu />
+        {/* <Menu /> */}
         <Route exact path="/" component={Home} />
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/signup" component={Signup} />
         <PrivateRoute path="/private" component={Private} />
       </Router>
     );

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import logo from '../../logo.svg';
+import './../../styles/app.css';
 
 class Private extends Component {
     render() {
@@ -8,7 +8,7 @@ class Private extends Component {
             <div className="App">
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo" />
-                    <h1>Private</h1>
+                    <h1 className="text-white">Private Component</h1>
                 </header>
             </div>
         );
