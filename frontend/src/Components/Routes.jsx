@@ -11,6 +11,8 @@ import PrivateRoute from './Auth/PrivateRoute';
 import { connect } from 'react-redux';
 import { logoutUser } from '../actions/index';
 
+import * as axios from 'axios';
+
 
 
 const mapStateToProps = state => {
@@ -31,6 +33,19 @@ class Routes extends Component {
       user: false,
     }
   }
+
+  componentWillMount() {
+    this.auth();
+  }
+
+    auth = () => {
+      axios.get('/user')
+        .then(result => {
+          if (result.status === 200) return this.props.login(false);
+          return this.setState({ user: result.data.user });
+        })
+        .catch(error => this.props.logout(false)); //Display server error to user gracefully, not just keeping them logged out
+    }
 
 
   render = () => {

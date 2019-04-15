@@ -1,17 +1,16 @@
-import { ADD_ARTICLE, LOGIN_USER, LOGOUT_USER } from "../constants/action-types";
+import { LOGIN_USER, UPDATE_USER, LOGOUT_USER } from "../constants/action-types";
 
 const initialState = {
   user: false,
 };
 
 function rootReducer(state = initialState, action) {
-  if (action.type === ADD_ARTICLE) {
+  if (action.type === LOGIN_USER) {
     return Object.assign({}, state, {
-      articles: state.articles.concat(action.payload),
-    //  eggs: state.eggs.concat(action.payload)
+      user: state.user = action.payload,
     });
   }
-  if (action.type === LOGIN_USER) {
+  if (action.type === UPDATE_USER) {
     return Object.assign({}, state, {
       user: state.user = action.payload,
     });
