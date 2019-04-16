@@ -18,20 +18,23 @@ function mapDispatchToProps(dispatch) {
 
 class Profile extends Component {
     render() {
+    const { username } = this.props.state.user;
+
         return (
             <div className="row">
                 <div className="col d-flex flex-column align-items-center">
                     <h1>Notes</h1>
-                    <p className="text-secondary pt-0 mt-0">Hello, Michael</p>
+                    <p className="text-secondary pt-0 mt-0">Hello, {username}</p>
+                    <Link to="/note/create"><button className="btn btn-primary">Create New Note</button></Link>
                     <ul className="d-flex flex-column justify-content-center align-items-center" id="Notes-Container">
                         <li className="d-flex justify-content-between">
-                            <Link to="createnote" className="remove-link-style">
+                            <Link to="/note/edit" className="remove-link-style">
                                 <p className="mb-0">Note Title 1</p>
                             </Link>
                             <i class="fas fa-ellipsis-h"></i>
                         </li>
                         <li className="d-flex justify-content-between">
-                            <Link to="createnote" className="remove-link-style">
+                            <Link to="/note/edit" className="remove-link-style">
                                 <p className="mb-0">Note Title 2</p>
                             </Link>
                             <i class="fas fa-ellipsis-h"></i>
