@@ -26,7 +26,7 @@ class CreateNote extends Component {
 
     handleNoteSubmit = () => {
         const { title, note } = this.state;
-        axios.post('/note/create', 
+        axios.post('user/note/create', 
         {
             title,
             note,

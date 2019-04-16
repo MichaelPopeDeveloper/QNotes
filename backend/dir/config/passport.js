@@ -8,7 +8,7 @@ passport.use(new LocalStrategy({
     usernameField: 'username',
     passwordField: 'password'
 }, function (username, password, done) {
-    User_1.User.findOne({ username: username })
+    User_1["default"].findOne({ username: username })
         .then(function (user) {
         if (!user || !Encryptor.compareEncryptedString(password, user.password)) {
             console.log('you done offed');
@@ -26,7 +26,7 @@ passport.serializeUser(function (user, done) {
 });
 passport.deserializeUser(function (id, done) {
     console.log('DEserialize ... called');
-    User_1.User.findOne({ _id: id }, function (err, user) {
+    User_1["default"].findOne({ _id: id }, function (err, user) {
         console.log('======= DESERILAIZE USER CALLED ======');
         console.log(user);
         console.log('--------------');
