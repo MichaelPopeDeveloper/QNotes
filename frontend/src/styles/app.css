@@ -8,5 +8,11 @@
   margin: 1rem;
   border: 1px solid lightgray;
 }
+#Notes-Container i:hover {
+  cursor: pointer;
+}
+#Notes-Container .remove-link-style {
+  color: black;
+}
 
 /*# sourceMappingURL=app.css.map */

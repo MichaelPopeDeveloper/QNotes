@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
-import logo from '../../logo.svg';
+import {
+    Link,
+} from "react-router-dom";
 import './../../styles/app.css';
-import * as axios from 'axios';
 import { connect } from 'react-redux';
 import { loginUser } from '../../actions/index';
 
 const mapStateToProps = state => {
-  return { state };
+    return { state };
 };
 
 function mapDispatchToProps(dispatch) {
-  return {
-    login: action => dispatch(loginUser(action))
-  };
+    return {
+        login: action => dispatch(loginUser(action))
+    };
 }
 
 class Profile extends Component {
@@ -24,7 +25,15 @@ class Profile extends Component {
                     <p className="text-secondary pt-0 mt-0">Hello, Michael</p>
                     <ul className="d-flex flex-column justify-content-center align-items-center" id="Notes-Container">
                         <li className="d-flex justify-content-between">
-                            <p className="mb-0">Note Title 1</p>
+                            <Link to="createnote" className="remove-link-style">
+                                <p className="mb-0">Note Title 1</p>
+                            </Link>
+                            <i class="fas fa-ellipsis-h"></i>
+                        </li>
+                        <li className="d-flex justify-content-between">
+                            <Link to="createnote" className="remove-link-style">
+                                <p className="mb-0">Note Title 2</p>
+                            </Link>
                             <i class="fas fa-ellipsis-h"></i>
                         </li>
                     </ul>
