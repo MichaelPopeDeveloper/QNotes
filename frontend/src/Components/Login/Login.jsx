@@ -74,7 +74,7 @@ class Login extends Component {
     const { user } = this.props.state;
     if (user) return <Redirect
       to={{
-        pathname: "/private",
+        pathname: "/profile",
         state: { from: this.props.location }
       }}
     />

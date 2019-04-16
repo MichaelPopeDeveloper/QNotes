@@ -6,7 +6,7 @@ import {
 import Home from './Home/Home';
 import Login from './Login/Login';
 import Signup from './Signup/Signup';
-import Private from './Auth/Private';
+import Profile from './Profile/Profile';
 import PrivateRoute from './Auth/PrivateRoute';
 import { connect } from 'react-redux';
 import { logoutUser } from '../actions/index';
@@ -55,7 +55,7 @@ class Routes extends Component {
         <Route exact path="/" component={Home} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
-        <PrivateRoute path="/private" component={Private} />
+        <PrivateRoute path="/profile" component={Profile} />
       </Router>
     );
   }

@@ -1,0 +1,12 @@
+#Notes-Container {
+  width: 100%;
+}
+#Notes-Container li {
+  list-style: none;
+  width: 80%;
+  padding: 1rem;
+  margin: 1rem;
+  border: 1px solid lightgray;
+}
+
+/*# sourceMappingURL=app.css.map */
