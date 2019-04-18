@@ -36,7 +36,17 @@ class Profile extends Component {
                     <Link to="/note/edit" className="remove-link-style">
                         <p className="mb-0">{note.title}</p>
                     </Link>
-                    <i class="fas fa-ellipsis-h"></i>
+                    <div class="dropdown">
+                    <i className="fas fa-ellipsis-h" data-toggle="dropdown"></i>
+
+                        {/* <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dropdown button
+  </button> */}
+                        <div className="dropdown-menu dropdown-menu-right mr-3" style={{right: '200px'}} aria-labelledby="dropdownMenuButton">
+                            <a className="dropdown-item" href="#"></a>
+                            <a className="dropdown-item" href="#">Delete</a>
+                        </div>
+                    </div>
                 </li>
             );
         }) : null;
@@ -44,7 +54,7 @@ class Profile extends Component {
 
     render() {
         const { username } = this.props.state.user;
-     
+
         return (
             <div className="row">
                 <div className="col d-flex flex-column align-items-center">
