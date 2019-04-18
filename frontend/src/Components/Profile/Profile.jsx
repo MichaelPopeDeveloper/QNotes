@@ -30,7 +30,7 @@ class Profile extends Component {
 
     mapNotes = () => {
         const { notes } = this.props.state.user;
-        return notes.map(note => {
+        return notes ? notes.map(note => {
             return (
                 <li className="d-flex justify-content-between">
                     <Link to="/note/edit" className="remove-link-style">
@@ -39,12 +39,12 @@ class Profile extends Component {
                     <i class="fas fa-ellipsis-h"></i>
                 </li>
             );
-        });
+        }) : null;
     }
 
     render() {
         const { username } = this.props.state.user;
-
+     
         return (
             <div className="row">
                 <div className="col d-flex flex-column align-items-center">
