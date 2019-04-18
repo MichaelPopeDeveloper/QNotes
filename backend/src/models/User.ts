@@ -16,6 +16,16 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  notes: [{
+    title: {
+      type: String,
+      required: false,
+    },
+    note: {
+      type: String,
+      required: true,
+    }
+  }]
 });
 
 const User = mongoose.model('User', UserSchema);

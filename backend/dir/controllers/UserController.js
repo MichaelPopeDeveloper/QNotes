@@ -1,14 +1,12 @@
 "use strict";
 exports.__esModule = true;
 var User_1 = require("../models/User");
-var passport = require('../config/passport');
 var Encryptor = require("../helper/Encryptor");
 var UserController = (function () {
     function UserController() {
     }
     UserController.checkUser = function (req, res) {
         console.log('req.session', req.session);
-        console.log('req.sessionID', req.sessionID);
         console.log('req.user', req.user);
         if (req.user) {
             var user = Object.assign({}, req.user._doc);
@@ -21,7 +19,7 @@ var UserController = (function () {
             res.status(401).send({ user: false });
         }
     };
-    UserController.Login = function (req, res, next) {
+    UserController.Login = function (req, res) {
         console.log('req.body', req.body);
         console.log('req.user', req.user);
         if (req.user) {
@@ -32,39 +30,34 @@ var UserController = (function () {
             res.send({ user: user });
         }
         else {
-            res.sendStatus(401);
+            res.sendStatus(401).send({ user: false });
         }
     };
-    UserController.Signup = function (req, res, next) {
-        var _a = req.body, username = _a.username, email = _a.email, password = _a.password;
+    UserController.Signup = function (req, res) {
         console.log('req.body', req.body);
-        User_1["default"].findOne({ username: username })
-            .then(function (user) {
-            if (!user) {
-                var newUser = new User_1["default"]({ username: username, email: email, password: Encryptor.encryptString(password) });
-                newUser.save()
-                    .then(function (result) {
-                    console.log('saved user result', result);
-                    next();
-                })["catch"](function (err) { return console.log(err); });
-            }
-            else {
-                res.send('Username already exists');
-            }
-        });
-        next();
-        passport.authenticate('local'),
-            console.log('req.user', req.user);
+        console.log('req.user', req.user);
         if (req.user) {
             var user = Object.assign({}, req.user._doc);
             delete user.password;
             delete user._id;
-            console.log('assign user', user);
             res.send({ user: user });
         }
         else {
-            res.sendStatus(401);
+            res.sendStatus(401).send({ user: false });
         }
+    };
+    UserController.SignupMiddleware = function (req, res, next) {
+        var _a = req.body, username = _a.username, email = _a.email, password = _a.password;
+        return User_1["default"].findOne({ username: username })
+            .then(function (user) {
+            if (!user) {
+                var newUser = new User_1["default"]({ username: username, email: email, password: Encryptor.encryptString(password) });
+                return newUser.save()
+                    .then(function () { return next(); })["catch"](function (err) { return console.log(err); });
+            }
+            console.log('username already exists');
+            return res.send({ error: 'Username already exists' });
+        })["catch"](function (error) { return res.send(error); });
     };
     UserController.Logout = function (req, res) {
         if (req.user) {

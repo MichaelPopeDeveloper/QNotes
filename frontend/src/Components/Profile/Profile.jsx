@@ -17,8 +17,33 @@ function mapDispatchToProps(dispatch) {
 }
 
 class Profile extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+
+        }
+    }
+
+    componentWillMount() {
+        console.log(this.props);
+    }
+
+    mapNotes = () => {
+        const { notes } = this.props.state.user;
+        return notes.map(note => {
+            return (
+                <li className="d-flex justify-content-between">
+                    <Link to="/note/edit" className="remove-link-style">
+                        <p className="mb-0">{note.title}</p>
+                    </Link>
+                    <i class="fas fa-ellipsis-h"></i>
+                </li>
+            );
+        });
+    }
+
     render() {
-    const { username } = this.props.state.user;
+        const { username } = this.props.state.user;
 
         return (
             <div className="row">
@@ -27,18 +52,7 @@ class Profile extends Component {
                     <p className="text-secondary pt-0 mt-0">Hello, {username}</p>
                     <Link to="/note/create"><button className="btn btn-primary">Create New Note</button></Link>
                     <ul className="d-flex flex-column justify-content-center align-items-center" id="Notes-Container">
-                        <li className="d-flex justify-content-between">
-                            <Link to="/note/edit" className="remove-link-style">
-                                <p className="mb-0">Note Title 1</p>
-                            </Link>
-                            <i class="fas fa-ellipsis-h"></i>
-                        </li>
-                        <li className="d-flex justify-content-between">
-                            <Link to="/note/edit" className="remove-link-style">
-                                <p className="mb-0">Note Title 2</p>
-                            </Link>
-                            <i class="fas fa-ellipsis-h"></i>
-                        </li>
+                        {this.mapNotes()}
                     </ul>
                 </div>
             </div>

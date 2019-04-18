@@ -15,7 +15,17 @@ var UserSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true
-    }
+    },
+    notes: [{
+            title: {
+                type: String,
+                required: false
+            },
+            note: {
+                type: String,
+                required: true
+            }
+        }]
 });
 var User = mongoose.model('User', UserSchema);
 exports["default"] = User;

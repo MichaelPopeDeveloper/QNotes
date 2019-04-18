@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from '../../logo.svg';
 import './../../styles/app.css';
 import * as axios from 'axios';
 import { connect } from 'react-redux';
@@ -24,14 +23,24 @@ class CreateNote extends Component {
         }
     }
 
-    handleNoteSubmit = () => {
+    componentWillMount() {
+        console.log('component mount props', this.props);
+    }
+
+
+    handleNoteSubmit = (event) => {
+        event.preventDefault();
         const { title, note } = this.state;
-        axios.post('user/note/create', 
-        {
-            title,
-            note,
-        })
-        .then(result => this.props.update(result.data.user));
+        axios.post('/user/note/create',
+            {
+                title,
+                note,
+            })
+            .then(result => {
+                this.props.update(result.data.user);
+                console.log('user should be updated', this.props);
+            })
+            .catch(error => console.log(error));
     }
 
     handleTitleChange = (event) => this.setState({ title: event.target.value });
@@ -54,6 +63,7 @@ class CreateNote extends Component {
                             <label for="exampleFormControlTextarea1">Note</label>
                             <textarea onChange={this.handleNoteValue} value={note} className="form-control" id="exampleFormControlTextarea1" rows="4" placeholder="Note..."></textarea>
                         </div>
+                        <button className="btn btn-primary">Create Note</button>
                     </form>
                 </div>
             </div>
