@@ -1,7 +1,8 @@
-import { LOGIN_USER, UPDATE_USER, LOGOUT_USER } from "../constants/action-types";
+import { LOGIN_USER, UPDATE_USER, LOGOUT_USER, NOTE_TO_EDIT } from "../constants/action-types";
 
 const initialState = {
   user: false,
+  noteToEdit: false,
 };
 
 function rootReducer(state = initialState, action) {
@@ -18,6 +19,11 @@ function rootReducer(state = initialState, action) {
   if (action.type === LOGOUT_USER) {
     return Object.assign({}, state, {
       user: state.user = action.payload,
+    });
+  }
+  if (action.type === NOTE_TO_EDIT) {
+    return Object.assign({}, state, {
+      user: state.noteToEdit = action.payload,
     });
   }
   return state;

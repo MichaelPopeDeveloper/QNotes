@@ -24,6 +24,18 @@ var NoteController = (function () {
             })["catch"](function (error) { return res.send(error); });
         }
     };
+    NoteController.retrieveNote = function (req, res) {
+        var id = req.body.id;
+        if (req.user) {
+            User_1["default"].findOne({ _id: req.user._id })
+                .then(function (userDoc) {
+                var user = userDoc;
+                var retrievedNote = user.notes.find(function (note) { return note._id === id; });
+                console.log('retrieved note: ', retrievedNote);
+                return retrievedNote ? res.send({ retrievedNote: retrievedNote }) : res.send({ error: 'The note was not found...' });
+            })["catch"](function (error) { return res.send({ error: error }); });
+        }
+    };
     return NoteController;
 }());
 exports["default"] = NoteController;

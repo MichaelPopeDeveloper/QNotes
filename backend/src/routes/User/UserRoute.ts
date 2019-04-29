@@ -10,5 +10,7 @@ UserRoute.get('/', UserController.checkUser);
 UserRoute.post('/login', passport.authenticate('local'), UserController.Login);
 UserRoute.post('/signup', UserController.SignupMiddleware, passport.authenticate('local'), UserController.Signup);
 UserRoute.post('/logout', UserController.Logout);
+ 
 UserRoute.post('/note/create', NoteController.createNote);
+UserRoute.post('/note/retrieve', NoteController.retrieveNote);
 

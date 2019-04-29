@@ -4,7 +4,8 @@ import {
 } from "react-router-dom";
 import './../../styles/app.css';
 import { connect } from 'react-redux';
-import { loginUser } from '../../actions/index';
+import { loginUser, noteToEdit } from '../../actions/index';
+import * as axios from 'axios';
 
 const mapStateToProps = state => {
     return { state };
@@ -12,7 +13,8 @@ const mapStateToProps = state => {
 
 function mapDispatchToProps(dispatch) {
     return {
-        login: action => dispatch(loginUser(action))
+        login: action => dispatch(loginUser(action)),
+        noteToEdit: action => dispatch(noteToEdit(action))
     };
 }
 
@@ -28,23 +30,28 @@ class Profile extends Component {
         console.log(this.props);
     }
 
+    retrieveNoteToEdit = (id) => axios.post('user/note/retrieve', { id }).then(note => this.props.noteToEdit(note)).catch(error => console.log(error));
+
+
     mapNotes = () => {
         const { notes } = this.props.state.user;
         return notes ? notes.map(note => {
             return (
-                <li className="d-flex justify-content-between">
-                    <Link to="/note/edit" className="remove-link-style">
+                <li className="d-flex justify-content-between"> 
+                    <Link to="/note/edit" onClick={this.retrieveNoteToEdit} className="remove-link-style">
                         <p className="mb-0">{note.title}</p>
                     </Link>
                     <div class="dropdown">
-                    <i className="fas fa-ellipsis-h" data-toggle="dropdown"></i>
+                        <i className="fas fa-ellipsis-h" data-toggle="dropdown"></i>
 
                         {/* <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Dropdown button
   </button> */}
-                        <div className="dropdown-menu dropdown-menu-right mr-3" style={{right: '200px'}} aria-labelledby="dropdownMenuButton">
-                            <a className="dropdown-item" href="#"></a>
-                            <a className="dropdown-item" href="#">Delete</a>
+                        <div className="dropdown-menu dropdown-menu-right mr-3" style={{ right: '200px' }} aria-labelledby="dropdownMenuButton">
+                            <Link to="/note/edit">
+                                <a className="dropdown-item" href="#">Edit</a>
+                            </Link>
+                            {/* <a className="dropdown-item" href="#">Delete</a> */}
                         </div>
                     </div>
                 </li>
