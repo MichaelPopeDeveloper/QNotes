@@ -10,5 +10,6 @@ exports.UserRoute.post('/login', passport.authenticate('local'), UserController_
 exports.UserRoute.post('/signup', UserController_1["default"].SignupMiddleware, passport.authenticate('local'), UserController_1["default"].Signup);
 exports.UserRoute.post('/logout', UserController_1["default"].Logout);
 exports.UserRoute.post('/note/create', NotesController_1["default"].createNote);
+exports.UserRoute.post('/note/edit', NotesController_1["default"].editNote);
 exports.UserRoute.post('/note/retrieve', NotesController_1["default"].retrieveNote);
 //# sourceMappingURL=UserRoute.js.map

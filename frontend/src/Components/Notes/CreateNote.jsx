@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import {
+    Link,
+} from 'react-router-dom';
 import './../../styles/app.css';
 import * as axios from 'axios';
 import { connect } from 'react-redux';
@@ -29,7 +32,6 @@ class CreateNote extends Component {
 
 
     handleNoteSubmit = (event) => {
-        event.preventDefault();
         const { title, note } = this.state;
         axios.post('/user/note/create',
             {
@@ -63,7 +65,9 @@ class CreateNote extends Component {
                             <label for="exampleFormControlTextarea1">Note</label>
                             <textarea onChange={this.handleNoteValue} value={note} className="form-control" id="exampleFormControlTextarea1" rows="4" placeholder="Note..."></textarea>
                         </div>
-                        <button className="btn btn-primary">Create Note</button>
+                        <Link to="/profile" onClick={this.handleNoteSubmit}>
+                            <button className="btn btn-primary">Create Note</button>
+                        </Link>
                     </form>
                 </div>
             </div>

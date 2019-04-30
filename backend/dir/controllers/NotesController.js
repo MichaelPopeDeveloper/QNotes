@@ -24,14 +24,32 @@ var NoteController = (function () {
             })["catch"](function (error) { return res.send(error); });
         }
     };
+    NoteController.editNote = function (req, res) {
+        var note = req.body.note;
+        if (req.user) {
+            User_1["default"].findOneAndUpdate({ _id: req.user._id }, {
+                $set: {
+                    "notes.$.note": note
+                }
+            })
+                .then(function (userDoc) {
+                User_1["default"].findOne({ _id: req.user.id })
+                    .then(function (userDoc) {
+                    var user = userDoc;
+                    delete user.password;
+                    delete user._id;
+                    res.send({ user: user });
+                })["catch"](function (error) { return res.send({ error: error }); });
+            })["catch"](function (error) { return res.send({ error: error }); });
+        }
+    };
     NoteController.retrieveNote = function (req, res) {
         var id = req.body.id;
         if (req.user) {
             User_1["default"].findOne({ _id: req.user._id })
                 .then(function (userDoc) {
                 var user = userDoc;
-                var retrievedNote = user.notes.find(function (note) { return note._id === id; });
-                console.log('retrieved note: ', retrievedNote);
+                var retrievedNote = user.notes.find(function (note) { return note._id.toString() === id; });
                 return retrievedNote ? res.send({ retrievedNote: retrievedNote }) : res.send({ error: 'The note was not found...' });
             })["catch"](function (error) { return res.send({ error: error }); });
         }

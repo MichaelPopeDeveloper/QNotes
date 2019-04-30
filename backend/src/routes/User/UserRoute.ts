@@ -12,5 +12,6 @@ UserRoute.post('/signup', UserController.SignupMiddleware, passport.authenticate
 UserRoute.post('/logout', UserController.Logout);
  
 UserRoute.post('/note/create', NoteController.createNote);
+UserRoute.post('/note/edit', NoteController.editNote);
 UserRoute.post('/note/retrieve', NoteController.retrieveNote);
 

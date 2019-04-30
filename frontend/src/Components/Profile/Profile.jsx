@@ -30,15 +30,22 @@ class Profile extends Component {
         console.log(this.props);
     }
 
-    retrieveNoteToEdit = (id) => axios.post('user/note/retrieve', { id }).then(note => this.props.noteToEdit(note)).catch(error => console.log(error));
+    retrieveNoteToEdit = (id) => axios.post('/user/note/retrieve', { id })
+        .then(result => {
+            this.props.noteToEdit(result.data.retrievedNote)
+            console.log(result);
+        }).catch(error => console.log(error));
 
 
     mapNotes = () => {
         const { notes } = this.props.state.user;
         return notes ? notes.map(note => {
             return (
-                <li className="d-flex justify-content-between"> 
-                    <Link to="/note/edit" onClick={this.retrieveNoteToEdit} className="remove-link-style">
+                <li className="d-flex justify-content-between">
+                    <Link to="/note/edit" onClick={() => {
+                        this.retrieveNoteToEdit(note._id);
+                        console.log('props', this.props);
+                    }} className="remove-link-style">
                         <p className="mb-0">{note.title}</p>
                     </Link>
                     <div class="dropdown">
